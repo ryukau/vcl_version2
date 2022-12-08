@@ -213,6 +213,7 @@ constexpr int V_DC = -256;
 // input:  functionnumber = leaf (eax), ecxleaf = subleaf(ecx)
 // output: output[0] = eax, output[1] = ebx, output[2] = ecx, output[3] = edx
 static inline void cpuid(int output[4], int functionnumber, int ecxleaf = 0) {
+#ifndef __arm64
 #if defined(__GNUC__) || defined(__clang__)           // use inline assembly, Gnu/AT&T syntax
     int a, b, c, d;
     __asm("cpuid" : "=a"(a), "=b"(b), "=c"(c), "=d"(d) : "a"(functionnumber), "c"(ecxleaf) : );
@@ -235,6 +236,7 @@ static inline void cpuid(int output[4], int functionnumber, int ecxleaf = 0) {
         mov[esi + 8], ecx
         mov[esi + 12], edx
     }
+#endif
 #endif
 }
 
