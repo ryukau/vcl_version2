@@ -209,7 +209,7 @@ constexpr int V_DC = -256;
 *
 *****************************************************************************/
 
-#ifndef __arm64
+#if !(defined(__arm64__) || defined(__aarch64__))
 
 // Define interface to cpuid instruction.
 // input:  functionnumber = leaf (eax), ecxleaf = subleaf(ecx)
