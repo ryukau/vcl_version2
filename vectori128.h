@@ -1005,7 +1005,8 @@ public:
         xmm = _mm_maskz_mov_epi8(__mmask16((1u << n) - 1), xmm);
 #else
         if (uint32_t(n) >= 16) return *this;
-        const char mask[32] = { -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        constexpr char c1 = static_cast<char>(-1);
+        const char mask[32] = { c1,c1,c1,c1,c1,c1,c1,c1,c1,c1,c1,c1,c1,c1,c1,c1,
             0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
         *this &= Vec16c().load(mask + 16 - n);
 #endif
